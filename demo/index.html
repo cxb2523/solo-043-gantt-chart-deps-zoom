@@ -28,6 +28,18 @@
 			margin-right="210"
 			margin-bottom="160"
 		></gantt-chart>
+
+		<h2>Dependencies, today marker and zoom</h2>
+		<button id="zoom-toggle" type="button">zoom: 1x</button>
+		<gantt-chart
+			id="chart2"
+			width="1150"
+			height="500"
+			margin-top="40"
+			margin-left="40"
+			margin-right="210"
+			margin-bottom="60"
+		></gantt-chart>
 	</body>
 	<script>
 		const element = document.querySelector('gantt-chart');
@@ -146,5 +158,35 @@
 		};
 
 		element.data = data;
+
+		const element2 = document.querySelector('#chart2');
+
+		element2.now = 13;
+		element2.data = {
+			dependencies: [
+				{from: 1, to: 2},
+				{from: 2, to: 3},
+				{from: 3, to: 5},
+				{from: 4, to: 5},
+				{from: 5, to: 6}
+			],
+			tasks: [
+				{id: 1, title: 'design', start: 0, duration: 4, class: 'c1', progress: 1},
+				{id: 2, title: 'scaffold', start: 4, duration: 3, class: 'c1', progress: .8},
+				{id: 3, title: 'backend', start: 7, duration: 5, class: 'c2', progress: .5},
+				{id: 4, title: 'frontend', start: 7, duration: 6, class: 'c3', progress: .4},
+				{id: 5, title: 'integration', start: 13, duration: 4, class: 'c2', progress: .1},
+				{id: 6, title: 'release', start: 17, duration: 2, class: 'c3'}
+			]
+		};
+
+		const zoomLevels = [1, 2, 4];
+		let zoomIndex = 0;
+		const zoomToggle = document.querySelector('#zoom-toggle');
+		zoomToggle.addEventListener('click', () => {
+			zoomIndex = (zoomIndex + 1) % zoomLevels.length;
+			element2.zoom = zoomLevels[zoomIndex];
+			zoomToggle.textContent = `zoom: ${zoomLevels[zoomIndex]}x`;
+		});
 	</script>
 </html>

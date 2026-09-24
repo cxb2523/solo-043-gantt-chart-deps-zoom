@@ -1,4 +1,5 @@
 import {svg} from 'hybrids';
+import {sortTasks} from './geometry';
 
 const taskVerticalPadding = 2;
 
@@ -20,14 +21,7 @@ export const tasks = {
 		taskWidth,
 		taskHeight
 	}) => {
-		const sortedTasks = data.tasks
-			.map(el => el)
-			.sort((a, b) =>
-				(a.start < b.start) ||
-				((a.start === b.start) && (a.duration < b.duration)) ?
-					-1 :
-					1
-			);
+		const sortedTasks = sortTasks(data.tasks);
 		return sortedTasks.map((task, index) => svg`
 			<g
 				transform="translate(
@@ -44,7 +38,7 @@ export const tasks = {
 				></rect>
 				<rect
 					y="${taskVerticalPadding + ((taskHeight - (2 * taskVerticalPadding)) * (0.5 - 0.1))}"
-					width="${taskWidth(task.duration * (task.progress || 0.0))}"
+					width="${taskWidth(task.duration * (task.progress || 0))}"
 					height="${(taskHeight - (2 * taskVerticalPadding)) * 0.2}"
 					rx="0"
 					class="progress"

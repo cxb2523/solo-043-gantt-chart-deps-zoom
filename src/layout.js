@@ -1,48 +1,49 @@
+// Hybrids property descriptors adapting the pure functions of
+// src/geometry.js to the component's reactive properties.
+import * as geometry from './geometry';
+
 export const margin = {
-	get: ({marginRight, marginBottom, marginLeft, marginTop}) => ({
-		top: marginTop,
-		right: marginRight,
-		bottom: marginBottom,
-		left: marginLeft
-	})
+	get: ({marginTop, marginRight, marginBottom, marginLeft}) =>
+		geometry.margin({marginTop, marginRight, marginBottom, marginLeft})
 };
 
 export const trimWidth = {
-	get: ({width, margin}) => width - margin.left - margin.right
+	get: ({width, margin}) => geometry.trimWidth({width, margin})
 };
 
 export const trimHeight = {
-	get: ({height, margin}) => height - margin.top - margin.bottom
+	get: ({height, margin}) => geometry.trimHeight({height, margin})
 };
 
 export const globalTransform = {
-	get: ({margin}) => `translate(${margin.left}, ${margin.top})`
+	get: ({margin}) => geometry.globalTransform({margin})
 };
 
 export const taskHeight = {
-	get: ({trimHeight, data}) => trimHeight / Math.max(10, data.tasks.length)
+	get: ({trimHeight, data}) =>
+		geometry.taskHeight({trimHeight, taskCount: data.tasks.length})
 };
 
 export const taskVerticalPosition = {
-	get: ({taskHeight}) => index => taskHeight * index
+	get: ({taskHeight}) => index =>
+		geometry.taskVerticalPosition({taskHeight, index})
 };
 
 export const latestEnd = {
-	get: ({data}) => data.tasks.length > 0 ?
-		data.tasks
-			.map(el => el.start + el.duration)
-			.reduce((p, c) => c > p ? c : p, 0) :
-		1
+	get: ({data}) => geometry.latestEnd(data.tasks)
 };
 
 export const unitWidth = {
-	get: ({trimWidth, latestEnd}) => trimWidth / latestEnd
+	get: ({trimWidth, latestEnd, zoom}) =>
+		geometry.unitWidth({trimWidth, latestEnd, zoom})
 };
 
 export const taskHorizontalPosition = {
-	get: ({unitWidth}) => start => unitWidth * start
+	get: ({unitWidth}) => start =>
+		geometry.taskHorizontalPosition({unitWidth, start})
 };
 
 export const taskWidth = {
-	get: ({unitWidth}) => duration => unitWidth * duration
+	get: ({unitWidth}) => duration =>
+		geometry.taskWidth({unitWidth, duration})
 };

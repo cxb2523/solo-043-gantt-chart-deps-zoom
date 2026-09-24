@@ -96,5 +96,26 @@ export default html`
 			fill-opacity: 0.7;
 		}
 
+		svg g.dependencies path.dependency {
+			fill: none;
+			stroke: var(--dependency-color, #353839);
+			stroke-width: 1.5;
+		}
+
+		svg marker#arrowhead polygon {
+			fill: var(--dependency-color, #353839);
+		}
+
+		svg g.today line {
+			stroke: var(--today-color, red);
+			stroke-width: 2;
+			stroke-dasharray: 4 2;
+		}
+
+		svg g.today text {
+			font-weight: normal;
+			fill: var(--today-color, red);
+		}
+
 	</style>
 `;
