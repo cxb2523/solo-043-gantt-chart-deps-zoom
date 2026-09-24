@@ -34,6 +34,13 @@ Web component implementation of a Gantt chart.
       progress: // Optional, defaults to 0.
     },
     ...
+  ],
+  dependencies: [ // Optional.
+    {
+      from: 1, // Id of the task the dependency starts from.
+      to: 2 // Id of the task the dependency points to.
+    },
+    ...
   ]
 }
 ```
@@ -42,6 +49,8 @@ Web component implementation of a Gantt chart.
 
 * `width`: chart width in pixels
 * `height`: chart height in pixels
+* `now`: optional week number, draws a today marker line with a label
+* `zoom`: unit width multiplier, one of `1`, `2` or `4`, defaults to `1`
 
 Margins attributes help to ensure task and milestone titles are visible.
 
@@ -59,6 +68,8 @@ See section [Usage](#usage) for an example.
 * `--font-size` defaults to `12px`
 * `--background-color` defaults to `white`
 * `--visibility-ticks` defaults to `visible`, set to `hidden` to hide the week ticks
+* `--dependency-color` defaults to `#353839`
+* `--today-color` defaults to `tomato`
 
 Up to 10 classes can be passed:
 

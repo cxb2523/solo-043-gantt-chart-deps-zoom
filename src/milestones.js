@@ -1,4 +1,5 @@
 import {svg} from 'hybrids';
+import {sortTasks} from './geometry';
 
 const taskVerticalPadding = 2;
 
@@ -20,15 +21,8 @@ export const milestones = {
 		taskWidth,
 		taskHeight
 	}) => {
-		const sortedTasks = data.tasks
-			.map(el => el)
-			.sort((a, b) =>
-				(a.start < b.start) ||
-				((a.start === b.start) && (a.duration < b.duration)) ?
-					-1 :
-					1
-			);
-		return data.milestones.map(milestone => {
+		const sortedTasks = sortTasks(data.tasks);
+		return (data.milestones || []).map(milestone => {
 			const index = sortedTasks.findIndex(task => task.id === milestone.taskId);
 			const task = sortedTasks[index];
 			return svg`

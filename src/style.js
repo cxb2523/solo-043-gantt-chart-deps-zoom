@@ -96,5 +96,27 @@ export default html`
 			fill-opacity: 0.7;
 		}
 
+		svg g.dependencies polyline {
+			fill: none;
+			stroke: var(--dependency-color, #353839);
+			stroke-width: 1.5;
+		}
+
+		svg marker#gantt-arrow path {
+			fill: var(--dependency-color, #353839);
+		}
+
+		svg g.today line {
+			stroke: var(--today-color, tomato);
+			stroke-width: 2;
+			stroke-dasharray: 6 4;
+		}
+
+		svg g.today text {
+			font-weight: normal;
+			font-size: var(--font-size, 12px);
+			fill: var(--today-color, tomato);
+		}
+
 	</style>
 `;

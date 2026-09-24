@@ -28,6 +28,20 @@
 			margin-right="210"
 			margin-bottom="160"
 		></gantt-chart>
+
+		<h2>Dependencies, today marker and zoom</h2>
+		<button id="zoom-toggle">zoom: 1x</button>
+		<div style="overflow-x: auto;">
+			<gantt-chart
+				id="zoomable"
+				width="1150"
+				height="500"
+				margin-top="40"
+				margin-left="40"
+				margin-right="210"
+				margin-bottom="60"
+			></gantt-chart>
+		</div>
 	</body>
 	<script>
 		const element = document.querySelector('gantt-chart');
@@ -146,5 +160,81 @@
 		};
 
 		element.data = data;
+
+		const zoomable = document.querySelector('#zoomable');
+		zoomable.now = 6;
+		zoomable.data = {
+			dependencies: [
+				{from: 1, to: 2},
+				{from: 2, to: 3},
+				{from: 3, to: 5},
+				{from: 4, to: 6}
+			],
+			milestones: [
+				{
+					id: 1,
+					taskId: 5,
+					title: 'Release',
+					date: 'June 2026'
+				}
+			],
+			tasks: [
+				{
+					id: 1,
+					title: 'design',
+					start: 0,
+					duration: 3,
+					class: 'c1',
+					progress: 1
+				},
+				{
+					id: 2,
+					title: 'scaffolding',
+					start: 3,
+					duration: 3,
+					class: 'c1',
+					progress: .8
+				},
+				{
+					id: 3,
+					title: 'geometry module',
+					start: 6,
+					duration: 4,
+					class: 'c2',
+					progress: .4
+				},
+				{
+					id: 4,
+					title: 'documentation',
+					start: 2,
+					duration: 8,
+					class: 'c3',
+					progress: .3
+				},
+				{
+					id: 5,
+					title: 'tests',
+					start: 10,
+					duration: 3,
+					class: 'c2'
+				},
+				{
+					id: 6,
+					title: 'release',
+					start: 10,
+					duration: 2,
+					class: 'c3'
+				}
+			]
+		};
+
+		const zoomLevels = [1, 2, 4];
+		let zoomIndex = 0;
+		const button = document.querySelector('#zoom-toggle');
+		button.addEventListener('click', () => {
+			zoomIndex = (zoomIndex + 1) % zoomLevels.length;
+			zoomable.zoom = zoomLevels[zoomIndex];
+			button.textContent = `zoom: ${zoomLevels[zoomIndex]}x`;
+		});
 	</script>
 </html>
