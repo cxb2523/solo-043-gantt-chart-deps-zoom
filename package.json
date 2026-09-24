@@ -1,0 +1,46 @@
+{
+  "name": "@nextbitlabs/gantt-chart",
+  "version": "1.3.2",
+  "description": "Web component of a gantt chart.",
+  "main": "dist/gantt-chart.cjs.js",
+  "module": "dist/gantt-chart.esm.js",
+  "browser": "dist/gantt-chart.umd.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "pretest": "npm run build",
+    "test": "xo src/*",
+    "lint-fix": "xo --fix src/*",
+    "release": "np"
+  },
+  "keywords": [
+    "gantt",
+    "plot",
+    "chart",
+    "webcomponent",
+    "component"
+  ],
+  "author": {
+    "name": "Riccardo Scalco",
+    "email": "riccardoscalco@gmail.com",
+    "url": "http://riccardoscalco.github.io/"
+  },
+  "license": "MIT",
+  "repository": "nextbitlabs/gantt-chart",
+  "homepage": "https://github.com/nextbitlabs/gantt-chart/",
+  "bugs": "https://github.com/nextbitlabs/gantt-chart/issues",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "hybrids": "^4.0.3",
+    "np": "^6.2.0",
+    "rollup": "^1.27.13",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "xo": "^0.27.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
